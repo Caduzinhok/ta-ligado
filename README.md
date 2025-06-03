@@ -25,11 +25,15 @@ Tá Ligado? é uma aplicação web que transforma temas escolares em explicaçõ
 1. Clone o repositório:
 
 ```bash
-git clone https://github.com/seu-usuario/ta-ligado-backend.git
+git clone https://github.com/seu-usuario/ta-ligado.git
 ```
 2. Instale as dependências no frontend e backend:
 
 ```bash
+cd ta-ligado/frontend
+npm install
+
+cd ../backend
 npm install
 
 ```
@@ -38,9 +42,12 @@ npm install
 ```bash
 GOOGLE_API_KEY=sua_chave_aqui
 ```
-4. Inicie o servidor:
+4. Inicie o servidor e o frontend:
 ```bash
 # No backend
+npm run dev
+
+# No frontend
 npm run dev
 
 ```
