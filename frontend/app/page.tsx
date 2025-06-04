@@ -14,13 +14,13 @@ export default function GeradorExplicacoes() {
 
   async function gerarExplicacao() {
     setLoading(true);
+    const endpoint = 'https://5carvcxwsc.execute-api.us-east-1.amazonaws.com/dev/api/gerar-explicacao'
     try {
-      const response = await fetch("https://5carvcxwsc.execute-api.us-east-1.amazonaws.com/dev/api/gerar-explicacao", {
+      const response = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ tema }),
+        body: JSON.stringify({ tema: tema }),
       });
-
       if (!response.ok) throw new Error("Erro na resposta da API");
 
       const json = await response.json();
@@ -41,7 +41,7 @@ export default function GeradorExplicacoes() {
       setLoading(false);
 
     } catch (err) {
-      console.error("Erro ao gerar explicação");
+      console.error(err);
       setLoading(false);
 
     }
@@ -82,6 +82,7 @@ export default function GeradorExplicacoes() {
               <h2 className="font-semibold">🧠 Quiz:</h2>
               {resultado.quiz.map((q, quizIndex) => (
                 <QuizCard 
+                  key={quizIndex}
                   quizIndex={quizIndex}
                   q={q}
                   resultado={resultado}

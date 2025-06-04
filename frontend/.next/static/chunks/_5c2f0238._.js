@@ -376,14 +376,15 @@ function GeradorExplicacoes() {
     const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     async function gerarExplicacao() {
         setLoading(true);
+        const endpoint = 'https://5carvcxwsc.execute-api.us-east-1.amazonaws.com/dev/api/gerar-explicacao';
         try {
-            const response = await fetch("http://localhost:3333/api/gerar-explicacao", {
+            const response = await fetch(endpoint, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    tema
+                    tema: tema
                 })
             });
             if (!response.ok) throw new Error("Erro na resposta da API");
@@ -396,7 +397,7 @@ function GeradorExplicacoes() {
             }
             setLoading(false);
         } catch (err) {
-            console.error("Erro ao gerar explicação");
+            console.error(err);
             setLoading(false);
         }
     }
@@ -533,7 +534,7 @@ function GeradorExplicacoes() {
                                         quizIndex: quizIndex,
                                         q: q,
                                         resultado: resultado
-                                    }, void 0, false, {
+                                    }, quizIndex, false, {
                                         fileName: "[project]/app/page.tsx",
                                         lineNumber: 84,
                                         columnNumber: 17
