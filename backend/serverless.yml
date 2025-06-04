@@ -1,0 +1,26 @@
+service: ta-ligado-backend
+
+provider:
+  name: aws
+  runtime: nodejs22.x
+  region: us-east-1
+  stage: dev
+  timeout: 10
+  environment:
+    GOOGLE_API_KEY: ${env:GOOGLE_API_KEY}  # A chave de API será passada via variáveis de ambiente no Lambda
+
+functions:
+  app:
+    handler: handler.handler
+    events:
+      - http:
+          path: /api/gerar-explicacao
+          method: post
+          cors: true
+plugins:
+  - serverless-offline
+
+package:
+  exclude:
+    - frontend/**
+    - .env

@@ -1,15 +1,16 @@
 import express from 'express';
 import cors from 'cors';
-import dotenv from 'dotenv';
 import { GoogleGenAI } from '@google/genai';
 
 const app = express();
+
 app.use(cors({
-    origin: ['http://localhost:3000', 'http://192.168.0.46:3000']// ou '*', em ambiente de dev
+  origin: ['http://localhost:3000', 'http://192.168.0.46:3000', 'https://ta-ligado.vercel.app/', 'https://ta-ligado-caduzinhoks-projects.vercel.app/'],
+  methods: ['POST'],
 }));
+
 app.use(express.json());
 
-dotenv.config();
 
 const ai = new GoogleGenAI({ apiKey: process.env.GOOGLE_API_KEY });
 
@@ -59,6 +60,7 @@ app.post('/api/gerar-explicacao', async (req, res) => {
     }
 });
 
-app.listen(process.env.PORT, () => {
-    console.log(`API rodando na porta ${process.env.PORT}`);
-});
+// app.listen(process.env.PORT, () => {
+//     console.log(`API rodando na porta ${process.env.PORT}`);
+// });
+export default app;
