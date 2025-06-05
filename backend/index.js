@@ -10,6 +10,7 @@ const app = express();
 app.use(cors({
   origin: ['http://localhost:3000', 'http://192.168.0.46:3000', 'https://ta-ligado.vercel.app', 'https://ta-ligado-caduzinhoks-projects.vercel.app'],
   methods: ['POST'],
+  allowedHeaders: ['Content-type', 'Authorization']
 }));
 
 app.use(express.json());
