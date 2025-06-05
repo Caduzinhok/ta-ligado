@@ -1,11 +1,14 @@
 import express from 'express';
 import cors from 'cors';
+import dotenv from 'dotenv';
 import { GoogleGenAI } from '@google/genai';
+import { configDotenv } from 'dotenv';
 
+// dotenv.config();
 const app = express();
 
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://192.168.0.46:3000', 'https://ta-ligado.vercel.app/', 'https://ta-ligado-caduzinhoks-projects.vercel.app/'],
+  origin: ['http://localhost:3000', 'http://192.168.0.46:3000', 'https://ta-ligado.vercel.app', 'https://ta-ligado-caduzinhoks-projects.vercel.app'],
   methods: ['POST'],
 }));
 
@@ -16,9 +19,11 @@ const ai = new GoogleGenAI({ apiKey: process.env.GOOGLE_API_KEY });
 
 app.post('/api/gerar-explicacao', async (req, res) => {
     try {
+        
         const { tema } = req.body;
         if (!tema) {
-            return res.status(400).json({ error: 'Tema é obrigatório' });
+            return res.status(400).json({ error: `Tema é obrigatório. Recebido: ${JSON.stringify(req.body)}` });
+
         }
 
         const prompt = `

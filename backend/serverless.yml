@@ -15,8 +15,13 @@ functions:
     events:
       - http:
           path: /api/gerar-explicacao
-          method: post
-          cors: true
+          method: ANY
+          cors: 
+            origin: '*'
+            headers:
+              - Content-Type
+              - Origin
+            allowCredentials: false
 plugins:
   - serverless-offline
 
